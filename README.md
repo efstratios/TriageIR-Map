@@ -21,4 +21,4 @@ Improve Registry Section - Some User related windows registry hives produced fro
 * Michael Ahrendt - https://github.com/MikeAhrendt
           
 ###Licence
-License: [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html), see the [Licence file](https://github.com/efstratios/TR_IR_MAP/blob/master/License.md)
+License: [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html), see the [Licence file](https://github.com/efstratios/TriageIR-Map/blob/master/LICENSE)
