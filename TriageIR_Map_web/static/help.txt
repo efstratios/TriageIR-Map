@@ -1,0 +1,81 @@
+
+>> Under Construction! <<
+
+.:Registry:.
+
+ The Registry contains information that Windows continually references during operation, such as profiles for each user,the applications installed on the computer and the types of documents that each can create,
+ property sheet settings for folders and application icons,what hardware exists on the system, and the ports that are being used.
+ A registry hive is a group of keys, subkeys, and values in the registry that has a set of supporting files that contain backups of its data.
+
+ The following table lists the predefined keys that are used by the system. The maximum size of a key name is 255 characters.
+
+ HKEY_CLASSES_ROOT –  storage for information about registered programs and file associations.
+ HKEY_CURRENT_USER – storage for settings specific to the current user. If your computer is set up with multiple user accounts this is where the settings for each user are kept.
+ HKEY_LOCAL_MACHINE – storage for settings that apply to all users of the computer.
+ HKEY_USERS – storage for subkeys which correspond to the HKEY_CURRENT_USER keys for each user account.
+ HKEY_CURRENT CONFIG – storage for keys generated during boot. This hive is actually created when the computer boots and is not stored on your hard drive.
+
+ NTUSER.DAT – contains the HKEY_CURRENT_USER hive.
+ SAM – contains the HKEY_LOCAL_MACHINE\SAM hive.
+ SECURITY – contains the HKEY_LOCAL_MACHINE\SECURITY hive.
+ SOFTWARE – contains the HKEY_LOCAL_MACHINE\SOFTWARE hive.
+ SYSTEM – contains all other sub hives of THE HKEY_LOCAL_MACHINE hive.
+
+ The "HKLM\SAM" key usually appears as empty for most users (unless they are granted access by administrators of the local system or administrators of domains managing the local system). It is used to reference all "Security Accounts Manager" (SAM) databases for all domains into which the local system has been administratively authorized or configured (including the local domain of the running system, whose SAM database is stored a subkey also named "SAM": other subkeys will be created as needed, one for each supplementary domain). Each SAM database contains all builtin accounts (mostly group aliases) and configured accounts (users, groups and their aliases, including guest accounts and administrator accounts) created and configured on the respective domain, for each account in that domain, it notably contains the user name which can be used to log on that domain, the internal unique user identifier in the domain, a cryptographic hash of each user's password for each enabled authentication protocol, the location of storage of their user Registry hive, various status flags (for example if the account can be enumerated and be visible in the logon prompt screen), and the list of domains (including the local domain) into which the account was configured.
+
+ The "HKLM\SECURITY" key usually appears empty for most users (unless they are granted access by users with administrative privileges) and is linked to the Security database of the domain into which the current user is logged on (if the user is logged on the local system domain, this key will be linked to the Registry hive stored by the local machine and managed by local system administrators or by the builtin "System" account and Windows installers). The kernel will access it to read and enforce the security policy applicable to the current user and all applications or operations executed by this user. It also contains a "SAM" subkey which is dynamically linked to the SAM database of the domain onto which the current user is logged on.
+
+ The "HKLM\SYSTEM" key is normally only writable by users with administrative privileges on the local system. It contains information about the Windows system setup, data for the secure random number generator (RNG), the list of currently mounted devices containing a filesystem, several numbered "HKLM\SYSTEM\Control Sets" containing alternative configurations for system hardware drivers and services running on the local system (including the currently used one and a backup), a "HKLM\SYSTEM\Select" subkey containing the status of these Control Sets, and a "HKLM\SYSTEM\CurrentControlSet" which is dynamically linked at boot time to the Control Set which is currently used on the local system.
+Each configured Control Set contains:an "Enum" subkey enumerating all known Plug-and-Play devices and associating them with installed system drivers (and storing the device-specific configurations of these drivers),a "Services" subkey listing all installed system drivers (with non device-specific configuration, and the enumeration of devices for which they are instantiated) and all programs running as services (how and when they can be automatically started),a "Control" subkey organizing the various hardware drivers and programs running as services and all other system-wide configuration,a "Hardware Profiles" subkey enumerating the various profiles that have been tuned (each one with "System" or "Software" settings used to modify the default profile, either in system drivers and services or in the applications) as well as the "Hardware Profiles\Current" subkey which is dynamically linked to one of these profiles.
+
+ The "HKLM\SOFTWARE" subkey contains software and Windows settings (in the default hardware profile). It is mostly modified by application and system installers. It is organized by software vendor (with a subkey for each), but also contains a "Windows" subkey for some settings of the Windows user interface, a "Classes" subkey containing all registered associations from file extensions, MIME types, Object Classes IDs and interfaces IDs (for OLE, COM/DCOM and ActiveX), to the installed applications or DLLs that may be handling these types on the local machine (however these associations are configurable for each user, see below), and a "Policies" subkey (also organized by vendor) for enforcing general usage policies on applications and system services (including the central certificates store used for authenticating, authorizing or disallowing remote systems or services running outside the local network domain).
+
+References:
+[1] https://support.microsoft.com/en-us/kb/256986
+[2] https://en.wikipedia.org/wiki/Windows_Registry
+
+.:Log Information:.
+Event logs are special files that record significant events on your computer, such as when a user logs on to the computer or when a program encounters an error. Whenever these types of events occur, Windows records the event in an event log that you can read by using Event Viewer. Advanced users might find the details in event logs helpful when troubleshooting problems with Windows and other programs.
+
+Event Viewer tracks information in several different logs.
+
+ Windows Logs:
+ The Windows Logs category includes the logs that were available on previous versions of Windows: the Application, Security, and System logs. It also includes two new logs: the Setup log and the Forwarded Events log. Windows logs are intended to store events from legacy applications and events that apply to the entire system.
+
+ Application (program) - Events are classified as error, warning, or information, depending on the severity of the event. An error is a significant problem, such as loss of data. A warning is an event that isn't necessarily significant, but might indicate a possible future problem. An information event describes the successful operation of a program, driver, or service.
+
+ Event logs - These logs are special files that record significant events on your computer, such as when a user logs on to the computer or when a program encounters an error. Whenever these types of events occur, Windows records the event in an event log that you can read by using Event Viewer. Advanced users might find the details in event logs helpful when troubleshooting problems with Windows and other programs.
+
+ Security - These events are called audits and are described as successful or failed depending on the event, such as whether a user trying to log on to Windows was successful.
+
+ Setup - Computers that are configured as domain controllers will have additional logs displayed here.
+
+ System - System events are logged by Windows and Windows system services, and are classified as error, warning, or information.
+
+ Forwarded Events - These events are forwarded to this log by other computers.
+
+References:
+[1] http://www.sevenforums.com/tutorials/226084-event-viewer-open-use-windows-7-a.html
+
+.:JumpLists:.
+
+ Jump Lists are lists of recently opened items, such as files, folders, or websites, organized by the program that you use to open them. You can use a Jump List to open items.
+
+References:
+[1] http://windows.microsoft.com/en-us/windows7/using-jump-lists-to-open-programs-and-items
+
+.:UpdatusUser:.
+
+ "UpdatusUser" folder is automatically created by NVIDIA graphics card driver installer. If you or Windows Update installed required drivers for nvidia graphics card in your computer,
+ it automatically creates a new user account "UpdatusUser" for update purposes. This user account is used by nvidia to update the graphics card driver whenever available.
+ Since a new user profile is created by the driver setup, it also creates a new folder "UpdatusUser" in C:\Users directory.
+
+References:
+[1] http://nvidia.custhelp.com/app/answers/detail/a_id/3067/~/what-is-nvidia-%E2%80%99updatususer%E2%80%99%3F
+
+.:Recent LNKs:.
+
+The Recent Items folder (previously called Recent Documents in Windows XP) is used by Windows to record what documents have been opened.
+
+References:
+[1] http://windows.microsoft.com/en-us/windows7/show-or-hide-recent-items-on-the-start-menu

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>TriageIR-Map</title>
+    <link rel="shortcut icon" type="image/png" href="../static/css/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="header">
+            <div class="header_app_name">
+                <a href=""><h2> TriageIR-Map </h2></a>
+                <h5>v1.0</h5>
+            </div>
+            <div class="header_buttons">
+                <button type="button" id="about">About</button>
+                <button type="button" id="help">Help</button>
+            </div>
+        </div>
+        {% comment %}end of header{% endcomment %}
+
+        <div id="main_container">
+
+            <div id="main_triage_content">
+                <div id="hosts">
+                    <div id="hosts_list">
+                        <div id="hosts_list_label">
+                            <h3>.: Hostname :.</h3>
+                        </div>
+                        <div id="hosts_list_hostnames">
+                            {# List hostnames #}
+                            {% for d in dirs %}
+                            <li><a href="{{ d }}" class="hostnames">{{ d }}</a></li>
+                            {% endfor %}
+                        </div>
+                        {#                    <div id="add_new_hostname">#}
+                        {#                        <div id="dropzone">#}
+                        {#                        <form action="{{ request.build_absolute_uri }}../static/logs/" method="POST"#}
+                        {#                              enctype="multipart/form-data">#}
+                        {#                            <input type="file" id="ctrl" webkitdirectory directory multiple/>#}
+                        {#                        </form>#}
+                        {#                    </div>#}
+                    </div>
+                </div>
+                {% comment %}end of hosts{% endcomment %}
+                <div id="triage_content">
+
+                    <div class="triage_content_navbar">
+
+                        <ul id="triage_ir_ul_options">
+                            <li>
+                                <button type="button" class="btn" id="system_info" onclick="toggleDiv('system_options')">
+                                    System
+                                    Information
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn" id="network_info" onclick="toggleDiv('network_options')">
+                                    Network
+                                    Information
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn" id="registry_info"
+                                onclick="toggleDiv('registry_options')">
+                                Registry
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn" id="disk_info" onclick="toggleDiv('disk_options')">Disk
+                                Information
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn" id="hashes_info" onclick="toggleDiv('hashes_options')">
+                                Hashes
+                                Information
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn" id="log_info" onclick="toggleDiv('log_options')">Log
+                                Information
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn" id="jump_lists_info"
+                            onclick="toggleDiv('jump_lists_options')">
+                            Jump
+                            Lists
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn" id="recent_lnks_info"
+                        onclick="toggleDiv('recent_lnks_options')">
+                        Recent
+                        LNKs
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn" id="recent_lnks_info"
+                    onclick="toggleDiv('recent_lnks_options')">
+                    Recent
+                    LNKs
+                </button>
+            </li>
+
+            <li>
+                <div class="search_bar">
+
+                    <div class="inner-addon left-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                        <input type="text" class="form-control" placeholder="Search.." id="search_form"
+                        onkeypress="search()"/>{% comment %}onchange="search()"{% endcomment %}
+                    </div>
+
+                </div>
+            </li>
+
+
+        </ul>
+
+    </div>
+    {% comment %}end of triage_top_navbar{% endcomment %}
+
+    <div class="triage_output_navbar_options" id="system_options" style="display:none;">
+
+        <button type="button" class="btn" id="system_info_option">System Information</button>
+        <button type="button" class="btn" id="processes_info">Processes</button>
+        <button type="button" class="btn" id="services_info">Services</button>
+        <button type="button" class="btn" id="handles_info">Handles</button>
+        <button type="button" class="btn" id="scheduled_tasks_info">Scheduled Tasks Information</button>
+        <button type="button" class="btn" id="hostname_info">Hostname Information</button>
+        <button type="button" class="btn" id="application_log">Application Log</button>
+        <button type="button" class="btn" id="incident_log">Incident Log</button>
+        <button type="button" class="btn" id="autorun_info">AutoRun Information</button>
+        <button type="button" class="btn" id="autorun_info_csv">AutoRun Information[csv]</button>
+        <button type="button" class="btn" id="startup_wmi_info">Startup WMI Info</button>
+        <button type="button" class="btn" id="account_settings_info">Account Settings</button>
+    </div>
+    <div class="triage_output_navbar_options" id="network_options" style="display:none;">
+        <button type="button" class="btn" id="ip_configuration">IP Configuration</button>
+        <button type="button" class="btn" id="active_connections">Active Connections</button>
+        <button type="button" class="btn" id="connection_routes">Connection Routes</button>
+        <button type="button" class="btn" id="arp_data">ARP Data</button>
+        <button type="button" class="btn" id="dns_info">DNS Information</button>
+        <button type="button" class="btn" id="netbios_info">NetBios Information</button>
+        <button type="button" class="btn" id="local_network_shares">Local Network Shares</button>
+        <button type="button" class="btn" id="open_shared_files">Open Shared Files</button>
+        <button type="button" class="btn" id="connected_sessions">Connected Sessions</button>
+        <button type="button" class="btn" id="workgroup_computers">Workgroup Computers</button>
+    </div>
+    <div class="triage_output_navbar_options" id="registry_options" style="display:none;">
+        <button type="button" class="btn" id="ntuser_reg_hive">NTUSER Registry Hive</button>
+        <button type="button" class="btn" id="sam_reg_hive">SAM Registry Hive</button>
+        <button type="button" class="btn" id="sec_reg_hive">SECURITY Registry Hive</button>
+        <button type="button" class="btn" id="software_reg_hive">SOFTWARE Registry Hive</button>
+        <button type="button" class="btn" id="system_reg_hive">SYSTEM Registry Hive</button>
+        <button type="button" class="btn" id="current_user_reg_hive">Current User Registry Hive</button>
+        <button type="button" class="btn" id="all_users_reg_hive">All Users Registry Hive</button>
+        <button type="button" class="btn" id="user_reg_hive">User Registry Hive</button>
+        <button type="button" class="btn" id="default_user_reg_hive">Default User Registry Hive</button>
+        <button type="button" class="btn" id="default_reg_hive">Default Registry Hive</button>
+        <button type="button" class="btn" id="temp_reg_hive">TEMP Registry Hive</button>
+        <button type="button" class="btn" id="public_reg_hive">Public Registry Hive</button>
+        <button type="button" class="btn" id="updatus_user_reg_hive">Updatus User Registry Hive</button>
+    </div>
+    <div class="triage_output_navbar_options" id="disk_options" style="display:none;">
+        <button type="button" class="btn" id="ntfs_config">NTFS Configuration</button>
+        <button type="button" class="btn" id="mounted_disks">Mounted Disks</button>
+        <button type="button" class="btn" id="dir_info">Directory Information</button>
+        <button type="button" class="btn" id="vol_info">Volume Information</button>
+    </div>
+    <div class="triage_output_navbar_options" id="hashes_options" style="display:none;">
+        <button type="button" class="btn" id="md5_hashes">MD5 Hashes</button>
+        <button type="button" class="btn" id="sha1_hashes">SHA1 Hashes</button>
+        <button type="button" class="btn" id="prefetch_copy">Prefetch Copy</button>
+
+    </div>
+    <div class="triage_output_navbar_options" id="log_options" style="display:none;">
+        <button type="button" class="btn" id="security_log">Security Log</button>
+        <button type="button" class="btn" id="system_log">System Log</button>
+        <button type="button" class="btn" id="system_vars">System Variables</button>
+        <button type="button" class="btn" id="event_log">Event Log</button>
+        <button type="button" class="btn" id="commands_log">Commands</button>
+    </div>
+
+    <div class="triage_output_navbar_options" id="jump_lists_options" style="display:none;">
+        <button type="button" class="btn" id="user_jump_list_auto">User Jump List (Auto)</button>
+        <button type="button" class="btn" id="user_jump_list_custom">User Jump List (Custom)</button>
+        <button type="button" class="btn" id="default_jump_list_auto">Default Jump List (Auto)</button>
+        <button type="button" class="btn" id="default_jump_list_custom">Default Jump List (Custom)</button>
+        <button type="button" class="btn" id="default_user_jump_list_auto">Default User Jump List (Auto)
+        </button>
+        <button type="button" class="btn" id="default_user_jump_list_custom">Default User Jump List (Custom)
+        </button>
+        <button type="button" class="btn" id="temp_jump_list_auto">TEMP Jump List (Auto)</button>
+        <button type="button" class="btn" id="temp_jump_list_custom">TEMP Jump List (Custom)</button>
+        <button type="button" class="btn" id="public_jump_list_auto">Public Jump List (Auto)</button>
+        <button type="button" class="btn" id="public_jump_list_custom">Public Jump List (Custom)</button>
+        <button type="button" class="btn" id="all_users_jump_list_auto">All Users Jump List (Auto)</button>
+        <button type="button" class="btn" id="all_users_jump_list_custom">All Users Jump List (Custom)
+        </button>
+        <button type="button" class="btn" id="updatus_user_jump_list_auto">Updatus User Jump List (Auto)
+        </button>
+        <button type="button" class="btn" id="updatus_user_jump_list_custom">Updatus User Jump List (Custom)
+        </button>
+    </div>
+
+    <div class="triage_output_navbar_options" id="recent_lnks_options" style="display:none;">
+        <button type="button" class="btn" id="user_recent_lnk">User</button>
+        <button type="button" class="btn" id="default_recent_lnk">Default</button>
+        <button type="button" class="btn" id="default_user_recent_lnk">Default User</button>
+        <button type="button" class="btn" id="public_user_recent_lnk">Public User</button>
+        <button type="button" class="btn" id="all_users_recent_lnk">All Users</button>
+        <button type="button" class="btn" id="updatus_user_recent_lnk">Updatus User</button>
+        <button type="button" class="btn" id="temp_user_recent_lnk">TEMP User</button>
+    </div>
+
+    <div id="triage_output_content">
+        {# Print file #}
+    </div>
+
+</div>
+
+</div>
+{% comment %}end of main_triage_content{% endcomment %}
+
+</div>
+{% comment %}end of main_container{% endcomment %}
+
+<div id="footer">
+    <div class="footer_text">
+        <h5><strong> TriageIR-Map </strong> Copyright &copy; 2016 Created by  <a href="https://efstratios.github.io/"> <strong>Efstratios Skleparis </strong><a/> </h5>
+    </div>
+</div>
+{% comment %}end of footer{% endcomment %}
+
+</div>
+{% comment %}end of wrapper{% endcomment %}
+
+<script src="../static/js/jquery-2.2.2.min.js"></script>
+<script src="../static/js/hostnames.js"></script>
+<script src="../static/js/add_host.js"></script>
+<script src="../static/js/search_string.js"></script>
+<script src="../static/js/navbar_options.js"></script>
+
+</body>
+
+</html>
