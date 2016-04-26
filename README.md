@@ -1,4 +1,4 @@
-# Triage-IR Map
+# TriageIR-Map
 Web Interface for [Triage-IR]( https://isc.sans.edu/diary/Incident+Response+with+Triage-ir/18509) program.
 
 ###Requirements
@@ -9,7 +9,6 @@ Web Interface for [Triage-IR]( https://isc.sans.edu/diary/Incident+Response+with
 ###Wiki
 
 See the [wiki pages](https://github.com/efstratios/TR_IR_MAP/wiki) for detailed installation and usage details.
-
 
 
 ###What's next?
