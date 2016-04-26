@@ -8,7 +8,7 @@ Web Interface for [Triage-IR]( https://isc.sans.edu/diary/Incident+Response+with
  
 ###Wiki
 
-See the [wiki pages](https://github.com/efstratios/TR_IR_MAP/wiki) for detailed installation and usage details.
+See the [wiki pages](https://github.com/efstratios/TriageIR-Map/wiki) for detailed installation and usage details.
 
 
 ###What's next?
